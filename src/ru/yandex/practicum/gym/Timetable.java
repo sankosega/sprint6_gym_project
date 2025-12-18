@@ -27,7 +27,16 @@ public class Timetable {
         }
 
         daySchedule.get(time).add(trainingSession);
-        allSessionsByDay.get(day).add(trainingSession);
+        
+        List<TrainingSession> dayList = allSessionsByDay.get(day);
+        int insertPosition = 0;
+        for (int i = 0; i < dayList.size(); i++) {
+            if (dayList.get(i).getTimeOfDay().compareTo(time) > 0) {
+                break;
+            }
+            insertPosition = i + 1;
+        }
+        dayList.add(insertPosition, trainingSession);
     }
 
     public List<TrainingSession> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
