@@ -40,17 +40,17 @@ public class Timetable {
     }
 
     public List<TrainingSession> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
-        return new ArrayList<>(allSessionsByDay.get(dayOfWeek));
+        return Collections.unmodifiableList(allSessionsByDay.get(dayOfWeek));
     }
 
     public List<TrainingSession> getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
         HashMap<TimeOfDay, List<TrainingSession>> daySchedule = timetable.get(dayOfWeek);
 
         if (daySchedule.containsKey(timeOfDay)) {
-            return new ArrayList<>(daySchedule.get(timeOfDay));
+            return Collections.unmodifiableList(daySchedule.get(timeOfDay));
         }
 
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
     public List<CounterOfTrainings> getCountByCoaches() {
